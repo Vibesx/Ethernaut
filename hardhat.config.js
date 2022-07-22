@@ -45,6 +45,7 @@ module.exports = {
 			url: LOCALHOST_RPC_URL,
 			// accounts: [],  // not needed, as the localhost will give us 10 accounts by default
 			chainId: 31337,
+			blockGasLimit: 30000000000,
 		},
 	},
 	gasReporter: {
