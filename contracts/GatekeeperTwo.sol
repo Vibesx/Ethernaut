@@ -43,7 +43,6 @@ contract Hack {
 	constructor(address gkAddress) public {
 		gk2 = GatekeeperTwo(gkAddress);
 		bytes8 key = calculateDiff();
-		checkGateThree();
 		gk2.enter(key);
 	}
 
