@@ -5,7 +5,7 @@ const { verify } = require("../utils/verify.js");
 module.exports = async function ({ getNamedAccounts, deployments }) {
 	const { deploy, log } = deployments;
 	const { deployer } = await getNamedAccounts();
-	const contractName = "GatekeeperOne";
+	const contractName = "Test";
 
 	log("----------------------------");
 	const args = [];

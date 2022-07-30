@@ -1,31 +1,17 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.5.0;
 
-//import '@openzeppelin/contracts/utils/math/SafeMath.sol';
+import "hardhat/console.sol";
 
 contract Test {
-    //using SafeMath for uint256;
-    uint a = 20;
+    uint256[] public myArray;
+    bytes32[] public bytesArray;
 
-    function testSomething(uint256 b) public view returns (uint256) {
-        return a - b;
-    }
-}
-
-contract Tester {
-    Test test;
-
-    constructor(address testAddress) public {
-        test = Test(testAddress);
+    function addElementToArray(uint256 el) public {
+        myArray.push(el);
     }
 
-    function testSomething() public view returns (uint256) {
-        uint256 result = 0;
-        try test.testSomething(25) {
-
-        } catch {
-
-        }
-        return result;
+    function addElementToBytes(uint256 el) public {
+        bytesArray.push(keccak256(abi.encodePacked(el)));
     }
 }

@@ -23,6 +23,7 @@ module.exports = {
 			{ version: "0.8.15" },
 			{ version: "0.4.19" },
 			{ version: "0.6.12" },
+			{ version: "0.5.17" },
 		],
 	},
 	defaultNetwork: "hardhat",
