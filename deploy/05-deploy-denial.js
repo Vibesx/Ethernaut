@@ -1,25 +1,27 @@
-const { network } = require("hardhat");
+const { network, ethers } = require("hardhat");
 const { developmentChains } = require("../helper-hardhat-config.js");
 const { verify } = require("../utils/verify.js");
 
 module.exports = async function ({ getNamedAccounts, deployments }) {
 	const { deploy, log } = deployments;
 	const { deployer } = await getNamedAccounts();
-	const testContractName = "TestSelfdestruct";
-	const victimContractName = "Victim";
+	const denialContract = "Denial";
+	const hackContract = "HackDenial";
 
 	log("----------------------------");
-	const args = [];
-	await deploy(testContractName, {
+	const denialArgs = [];
+	const deployedDenialContract = await deploy(denialContract, {
 		from: deployer,
-		args: args,
+		args: denialArgs,
+		value: 1000000000000000,
 		log: true,
 		waitConfirmations: network.config.blockConfirmations,
 	});
 
-	await deploy(victimContractName, {
+	const hackArgs = [deployedDenialContract.address];
+	const deployedHackContract = await deploy(hackContract, {
 		from: deployer,
-		args: args,
+		args: hackArgs,
 		log: true,
 		waitConfirmations: network.config.blockConfirmations,
 	});
@@ -27,4 +29,4 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
 	log("----------------------------");
 };
 
-module.exports.tags = ["all", "testStuff", "main"];
+module.exports.tags = ["all", "denial", "main"];

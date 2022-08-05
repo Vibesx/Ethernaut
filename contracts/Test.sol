@@ -1,17 +1,27 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.5.0;
+pragma solidity ^0.6.0;
 
 import "hardhat/console.sol";
 
-contract Test {
-    uint256[] public myArray;
-    bytes32[] public bytesArray;
+contract TestSelfdestruct {
+	function seldDest() public {
+		selfdestruct(0x5B38Da6a701c568545dCfcB03FcB875f56beddC4);
+	}
 
-    function addElementToArray(uint256 el) public {
-        myArray.push(el);
-    }
+	function doSomething() public pure returns (uint8) {
+		return 24;
+	}
 
-    function addElementToBytes(uint256 el) public {
-        bytesArray.push(keccak256(abi.encodePacked(el)));
-    }
+	fallback() external {}
+}
+
+contract Victim {
+	function delegateSelfdestruct(address addr) public {
+		(bool success, ) = addr.delegatecall(abi.encodeWithSignature("selfDest()"));
+		require(success);
+	}
+
+	function doSomethingElse() public pure returns (uint8) {
+		return 42;
+	}
 }
