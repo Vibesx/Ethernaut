@@ -22,4 +22,8 @@ contract MyDetectionBot is IDetectionBot {
 			IForta(msg.sender).raiseAlert(user);
 		}
 	}
+
+	function setDetectionBot(address addr) public {
+		IForta(addr).setDetectionBot(address(this));
+	}
 }
